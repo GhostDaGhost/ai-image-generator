@@ -1,21 +1,22 @@
-import { Link, ImageList, ImageListItem } from "@mui/material";
+import { Link, Box } from "@mui/material";
 
 // IMAGE GRID
 export default (props: ImageGridProps) => {
     return (
-        <ImageList sx={{ height: 600, mt: 3 }} cols={2}>
-            {props.generatedImages.map((imageURL: string, index: number) => (
-                <ImageListItem key={index}>
-                    <Link href={imageURL} download={`image-${index}.jpg`}>
+        <Box sx={{ mt: 3, p: 2, borderRadius: 1, bgcolor: 'black' }}>
+            <Box display="grid" sx={{ gap: '2vmin', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+                {props.generatedImages.map((imageURL: string, index: number) => (
+                    <Link key={index} href={imageURL} download={`image-${index}.jpg`}>
                         <img
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             src={imageURL}
                             alt={`generated image #${index}`}
                             draggable="false"
                             loading="lazy"
                         />
                     </Link>
-                </ImageListItem>
-            ))}
-        </ImageList>
+                ))}
+            </Box>
+        </Box>
     )
 }
